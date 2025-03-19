@@ -776,61 +776,6 @@ do
 		local Pages = Library.Pages
 		local Sections = Library.Sections
 		--
-        function Library:MakeResizable(frame) 
-            local Frame = Instance.new("TextButton")
-            Frame.Position = UDim2.new(1, -10, 1, -10)
-            Frame.BorderColor3 = Color3.new(0, 0, 0)
-            Frame.Size = UDim2.new(0, 10, 0, 10)
-            Frame.BorderSizePixel = 0
-            Frame.BackgroundColor3 = Color3.new(255, 255, 255)
-            Frame.Parent = frame
-            Frame.BackgroundTransparency = 1 
-            Frame.Text = ""
-
-            local resizing = false 
-            local start_size 
-            local start 
-            local og_size = frame.Size  
-
-            Frame.InputBegan:Connect(function(input)
-                if input.UserInputType == Enum.UserInputType.MouseButton1 then
-                    resizing = true
-                    start = input.Position
-                    start_size = frame.Size
-                end
-            end)
-
-            Frame.InputEnded:Connect(function(input)
-                if input.UserInputType == Enum.UserInputType.MouseButton1 then
-                    resizing = false
-                end
-            end)
-
-            Library:Connection(UserInputService.InputChanged, function(input, game_event) 
-                if resizing and input.UserInputType == Enum.UserInputType.MouseMovement then
-                    local mouse_pos = Vector2.new(Mouse.X, Mouse.Y)
-                    local viewport_x = Camera.ViewportSize.X
-                    local viewport_y = Camera.ViewportSize.Y
-
-                    local current_size = UDim2.new(
-                        start_size.X.Scale,
-                        math.clamp(
-                            start_size.X.Offset + (input.Position.X - start.X),
-                            og_size.X.Offset,
-                            viewport_x
-                        ),
-                        start_size.Y.Scale,
-                        math.clamp(
-                            start_size.Y.Offset + (input.Position.Y - start.Y),
-                            og_size.Y.Offset,
-                            viewport_y
-                        )
-                    )
-                    frame.Size = current_size
-                end
-            end)
-        end
-		--
 		function Library:New(Properties)
 			if not Properties then
 				Properties = {}
@@ -1042,7 +987,6 @@ do
 
 			-- // Returns
 			Library.Holder = Outline
-			Library:MakeResizable(Outline)
 			return setmetatable(Window, Library)
 		end
 		--
