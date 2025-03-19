@@ -2868,6 +2868,10 @@ do
 			window:Button({Name = "Remove Voice Chat Ban", Callback = function()
 				game:GetService("VoiceChatService"):joinVoice()
 			end})
+
+			window:Button({Name = "Unload", Callback = function()
+				Library:Unload()
+			end})
 		end
 		--
 	end
