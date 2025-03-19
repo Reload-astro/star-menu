@@ -8,11 +8,7 @@ local Library = loadstring(game:HttpGet('https://raw.githubusercontent.com/Reloa
     Accent = default_color
 })
 
-local ui = {
-	window = nil,
-    sections = {},
-	tabs = {}
-}
+local ui = {window = nil, sections = {}, tabs = {}}
 
 ui.window = Library:New({Size = UDim2.new(0, 600, 0, 500)})
 
@@ -21,7 +17,11 @@ ui.tabs['legit'] = ui.window:Page({
     Name = 'Legit',
     Icon = 'http://www.roblox.com/asset/?id=6023426921'
 })
-ui.sections['legit_main']= ui.tabs['legit']:Section({Name = 'Main', Side = 'Left', Size = 427})
+ui.sections['legit_main'] = ui.tabs['legit']:Section({
+    Name = 'Main',
+    Side = 'Left',
+    Size = 427
+})
 
 ui.tabs['rage'] = ui.window:Page({
     Name = 'Rage',
@@ -56,10 +56,35 @@ ui.tabs['settings'] = ui.window:Page({
     Icon = 'http://www.roblox.com/asset/?id=6031280882'
 })
 
-ui.sections['legit_main']:Toggle({Name = 'Example Toggle', Flag = 'example_toggle'})
-ui.sections['legit_main']:Keybind({Flag = 'example_keybind', Name = 'Example Keybind', Default = Enum.KeyCode.Q, Mode = 'Toggle'})
-ui.sections['legit_main']:Slider({Name = 'Example Slider', Flag = 'example_slider', Default = 1, Minimum = 0, Maximum = 100, Decimals = 0.01, Ending = '%'});
-ui.sections['legit_main']:List({Name = 'Example Listbox', Flag = 'example_listbox', Options = {'One', 'Two', 'Three', 'Four'}, Default = 'One'});
-ui.sections['legit_main']:Colorpicker({Name = 'Example Colorpicker', Flag = 'example_colorpicker', Default = default_color});
+ui.sections['legit_main']:Toggle({
+    Name = 'Example Toggle',
+    Flag = 'example_toggle'
+})
+ui.sections['legit_main']:Keybind({
+    Flag = 'example_keybind',
+    Name = 'Example Keybind',
+    Default = Enum.KeyCode.Q,
+    Mode = 'Toggle'
+})
+ui.sections['legit_main']:Slider({
+    Name = 'Example Slider',
+    Flag = 'example_slider',
+    Default = 1,
+    Minimum = 0,
+    Maximum = 100,
+    Decimals = 0.01,
+    Ending = '%'
+});
+ui.sections['legit_main']:List({
+    Name = 'Example Listbox',
+    Flag = 'example_listbox',
+    Options = {'One', 'Two', 'Three', 'Four'},
+    Default = 'One'
+});
+ui.sections['legit_main']:Colorpicker({
+    Name = 'Example Colorpicker',
+    Flag = 'example_colorpicker',
+    Default = default_color
+});
 
 Library:Configs(ui.tabs['settings'])
