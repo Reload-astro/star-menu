@@ -4,6 +4,10 @@ if not game:IsLoaded() then
     game.Loaded:Wait()
 end
 
+if getgenv().init then
+	getgenv().init:Unload()
+end
+
 local Library = {}
 do
 	Library = {
@@ -117,12 +121,12 @@ do
 
 	-- // Misc Functions
 	do
-		function Library:Connection(signal, Callback)
-			local Con = signal:Connect(Callback)
+		function Library:Connection(Signal, Callback)
+            local connection = Signal:Connect(Callback)
+            
+            table.insert(Library.Connections, connection)
 
-			table.insert(Library.Connections, signal)
-
-			return Con
+            return connection 
 		end
 		--
 		function Library:Instance(class, properties) 
@@ -137,24 +141,18 @@ do
             return ins 
         end
 		--
-		function Library:Disconnect(Connection)
-			Connection:Disconnect()
-		end
-		--
-		function Library:Destroy(Item)
-			Item:Destroy()
-		end
-		--
 		function Library:Unload()
-            Library:Destroy(Library.ScreenGUI)
+            Library.ScreenGUI:Destroy() 
 
             for _, Connection in Library.Connections do 
-				Library:Disconnect(Connection)
+				Connection:Disconnect()
             end     
 
             for _, Item in Library.Instances do 
-                Library:Destroy(Item)
+                Item:Destroy()
             end 
+
+            getgenv().init = nil
         end
 		--
 		function Library:Round(Number, Float)
@@ -2877,4 +2875,5 @@ do
 	end
 end
 
+getgenv().init = Library
 return Library
