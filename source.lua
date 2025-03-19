@@ -115,6 +115,7 @@ do
 	local LocalPlayer = Players.LocalPlayer
 	local Mouse = LocalPlayer:GetMouse()
 	local PlayerGui = LocalPlayer:FindFirstChild('PlayerGui')
+	local RunService = game:GetService("RunService")
 	local TweenService = game:GetService("TweenService")
 	local ReplicatedStorage = game:GetService("ReplicatedStorage")
 	local UserInputService = game:GetService("UserInputService")
@@ -735,7 +736,7 @@ do
 			table.remove(Library.Notifs, table.find(Library.Notifs, notification))
 			Library:updateNotifsPositions(Position)
 			task.wait(0.5)
-			Library:Destroy(NewInd)
+			NewInd:Destroy()
 		end
 
 		task.spawn(function()
@@ -2406,7 +2407,7 @@ do
 						if Keybind.Flag then
 							Library.Flags[Keybind.Flag] = true
 						end
-						c = Library:Connection(game:GetService("RunService").RenderStepped, function()
+						c = Library:Connection(RunService.RenderStepped, function()
 							if Keybind.Callback then
 								Keybind.Callback(true)
 							end
