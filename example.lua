@@ -1,3 +1,6 @@
+local Decimals = 4
+local Clock = os.clock()
+
 local default_color = Color3.fromRGB(79, 155, 255)
 local Library = loadstring(game:HttpGet('https://raw.githubusercontent.com/Reload-astro/star-menu/refs/heads/main/source.lua'))({
     cheatname = 'Example',
@@ -60,12 +63,14 @@ ui.sections['legit_main']:Toggle({
     Name = 'Example Toggle',
     Flag = 'example_toggle'
 })
+
 ui.sections['legit_main']:Keybind({
     Flag = 'example_keybind',
     Name = 'Example Keybind',
     Default = Enum.KeyCode.Q,
     Mode = 'Toggle'
 })
+
 ui.sections['legit_main']:Slider({
     Name = 'Example Slider',
     Flag = 'example_slider',
@@ -74,17 +79,22 @@ ui.sections['legit_main']:Slider({
     Maximum = 100,
     Decimals = 0.01,
     Ending = '%'
-});
+})
+
 ui.sections['legit_main']:List({
     Name = 'Example Listbox',
     Flag = 'example_listbox',
     Options = {'One', 'Two', 'Three', 'Four'},
     Default = 'One'
-});
+})
+
 ui.sections['legit_main']:Colorpicker({
     Name = 'Example Colorpicker',
     Flag = 'example_colorpicker',
     Default = default_color
-});
+})
 
 Library:Configs(ui.tabs['settings'])
+
+local Time = (string.format("%."..tostring(Decimals).."f", os.clock() - Clock))
+Library:Notification(("Loaded In "..tostring(Time)), 6)
