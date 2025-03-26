@@ -8,8 +8,21 @@ if getgenv().init then
 	getgenv().init:Unload()
 end
 
+local Players = game:GetService("Players")
+local Workspace = game:GetService("Workspace")
+local Camera = Workspace.CurrentCamera
+local LocalPlayer = Players.LocalPlayer
+local Mouse = LocalPlayer:GetMouse()
+local PlayerGui = LocalPlayer:FindFirstChild('PlayerGui')
+local HttpService = game:GetService("HttpService")
+local RunService = game:GetService("RunService")
+local TweenService = game:GetService("TweenService")
+local ReplicatedStorage = game:GetService("ReplicatedStorage")
+local UserInputService = game:GetService("UserInputService")
+
 local Library = {
 	Open = true,
+	Folder = nil,
 	Connections = {},
 	Instances = {},
 	Pages = {},
@@ -106,10 +119,6 @@ if not isfile(Library.cheatname..'/'..Library.gamename.."/assets/main.ttf") then
 	writefile(Library.cheatname..'/'..Library.gamename.."/assets/main.ttf", game:HttpGet("https://raw.githubusercontent.com/Reload-astro/star-menu/refs/heads/main/assets/font.ttf"))
 end 
 
-if not isfile(Library.cheatname..'/'..Library.gamename.."/assets/main_encoded.ttf") then 
-	writefile(Library.cheatname..'/'..Library.gamename.."/assets/main_encoded.ttf", http_service:JSONEncode(tahoma))
-end 
-
 local tahoma = {
 	name = "Tahoma",
 	faces = {
@@ -122,25 +131,24 @@ local tahoma = {
 	}
 }
 
+if not isfile(Library.cheatname..'/'..Library.gamename.."/assets/main_encoded.ttf") then 
+	writefile(Library.cheatname..'/'..Library.gamename.."/assets/main_encoded.ttf", HttpService:JSONEncode(tahoma))
+end 
+
 Library.Font = Font.new(getcustomasset(Library.cheatname..'/'..Library.gamename.."/assets/main_encoded.ttf"), Enum.FontWeight.Regular)
 
-local Flags = {} -- Ignore
-local ColorHolders = {}
+local Flags = {}
 
 -- // Extension
 Library.__index = Library
 Library.Pages.__index = Library.Pages
 Library.Sections.__index = Library.Sections
-local Players = game:GetService("Players")
-local Workspace = game:GetService("Workspace")
-local Camera = Workspace.CurrentCamera
-local LocalPlayer = Players.LocalPlayer
-local Mouse = LocalPlayer:GetMouse()
-local PlayerGui = LocalPlayer:FindFirstChild('PlayerGui')
-local RunService = game:GetService("RunService")
-local TweenService = game:GetService("TweenService")
-local ReplicatedStorage = game:GetService("ReplicatedStorage")
-local UserInputService = game:GetService("UserInputService")
+
+if not PlayerGui:FindFirstChild("Menu") then
+	Library.Folder = Instance.new("Folder")
+	Library.Folder.Name = "Menu"
+	Library.Folder.Parent = PlayerGui
+end
 
 -- // Misc Functions
 do
@@ -166,6 +174,7 @@ do
 	--
 	function Library:Unload()
 		Library.ScreenGUI:Destroy() 
+		Library.Folder:Destroy()
 
 		for _, Connection in Library.Connections do 
 			Connection:Disconnect()
@@ -822,21 +831,21 @@ function Library:New(Properties)
 	local Glow = Instance.new('ImageLabel', Outline)
 	--
 	Library:Connection(Players.LocalPlayer.CharacterRemoving, function()
-		if Library.ScreenGUI then
-			Library.ScreenGUI.Parent = ReplicatedStorage
+		if Library.Folder then
+			Library.Folder.Parent = ReplicatedStorage
 		end
 	end)
 	--
 	Library:Connection(Players.LocalPlayer.CharacterAdded, function()
-		if Library.ScreenGUI and Library.ScreenGUI.Parent == ReplicatedStorage then
-			Library.ScreenGUI.Parent = PlayerGui
+		if Library.Folder and Library.Folder.Parent == ReplicatedStorage then
+			Library.Folder.Parent = PlayerGui
 		end
 	end)
 	--
 	ScreenGui.DisplayOrder = 100
 	ScreenGui.ZIndexBehavior = Enum.ZIndexBehavior.Sibling
 	Library.ScreenGUI = ScreenGui
-	Library.ScreenGUI.Parent = PlayerGui
+	Library.ScreenGUI.Parent = Library.Folder
 	--
 	Outline.Name = "Outline"
 	Outline.Position = UDim2.new(0.5,0,0.5,0)
