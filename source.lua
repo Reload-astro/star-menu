@@ -196,6 +196,10 @@ do
 		return string.format("%.14g", Library.UnNamedFlags)
 	end
 	--
+	function Library.Animation(text) 
+		local pattern = {} for i = 1, tonumber(text:len()) do table.insert(pattern, string.sub(text, 1, i)) end for i = tonumber(text:len()) - 1, 0, -1 do table.insert(pattern, string.sub(text, 1, i)) end return pattern 
+	end 
+	--
 	function Library:GetConfig()
 		local Config = ""
 		for Index, Value in pairs(self.Flags) do
@@ -2655,8 +2659,9 @@ end
 function Library:Watermark(Properties)
 	local Watermark = {
 		Name = (Properties.Name or Properties.name or Library.cheatname..' '..Library.gamename),
-		AnimateText = nil
 	}
+
+	local animated_text = Library:Animation( Library.cheatname .. " | Beta") 
 	--
 	local Outline = Instance.new("Frame")
 	Outline.Name = "Outline"
@@ -2697,7 +2702,7 @@ function Library:Watermark(Properties)
 	Title.Name = "Title"
 	Title.FontFace = Library.Font
 	Title.RichText = true
-	Title.Text = Watermark.Name
+	Title.Text = "Cheat Name | Beta"
 	Title.TextColor3 = Color3.fromRGB(255, 255, 255)
 	Title.TextSize = 13
 	Title.TextXAlignment = Enum.TextXAlignment.Left
@@ -2719,25 +2724,17 @@ function Library:Watermark(Properties)
 
 
 	task.spawn(function()
-		while task.wait() do
-			for i = 1, #Library.cheatname..' '..Library.gamename do
-				Watermark.AnimateText = string.sub(Library.cheatname..' '..Library.gamename, 1, i) .. ""
-				Title.Text = Watermark.AnimateText .. " " .. Watermark.Name
-				task.wait(0.4)
-			end
-
-			for i = #Library.cheatname..' '..Library.gamename - 1, 1, -1 do
-				Watermark.AnimateText = string.sub(Library.cheatname..' '..Library.gamename, 1, i) .. ""
-				Title.Text = Watermark.AnimateText .. " " .. Watermark.Name
-				task.wait(0.4)
-			end
-		end
+		while true do 
+			if Outline.Visible then 
+				for i = 1, #animated_text do 
+					task.wait(.2)
+					Title.Text = animated_text[i]
+				end 
+			end 
+			task.wait(.2)
+		end 
 	end)
-	-- // Functions
-	function Watermark:UpdateText(NewText)
-		Watermark.Name = NewText
-		Title.Text = Watermark.AnimateText .. " " .. Watermark.Name
-	end
+
 	function Watermark:SetVisible(State)
 		Outline.Visible = State
 	end
