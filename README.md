@@ -46,7 +46,7 @@ This is how you import the library through the repository.
   ```lua
   local Tab = Window:Page({
       Name = 'Tab',
-      Icon = 'http://www.roblox.com/asset/?id=4483362458'
+      Icon = 'http://www.roblox.com/asset/?id=6023426921'
   })
   ```
 
