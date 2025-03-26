@@ -196,13 +196,13 @@ do
 		return string.format("%.14g", Library.UnNamedFlags)
 	end
 	--
-	function Library.Animation(Text)
+	function Library:Animation(text)
 		local pattern = {}
-		for i = 1, tonumber(tostring(Text):len()) do
-			table.insert(pattern, string.sub(tostring(Text), 1, i))
+		for i = 1, tonumber(text:len()) do
+			table.insert(pattern, string.sub(text, 1, i))
 		end
-		for i = tonumber(tostring(Text):len()) - 1, 0, -1 do
-			table.insert(pattern, string.sub(tostring(Text), 1, i))
+		for i = tonumber(text:len()) - 1, 0, -1 do
+			table.insert(pattern, string.sub(text, 1, i))
 		end
 		return pattern
 	end
@@ -2683,7 +2683,7 @@ function Library:Watermark()
 	Outline.BackgroundColor3 = Color3.fromRGB(50, 50, 50)
 	Outline.BorderColor3 = Color3.fromRGB(0, 0, 0)
 	Outline.Position = UDim2.new(1, -10, 0, 10)
-	Outline.Size = UDim2.fromOffset(((#AnimatedText / 1.6) * 5) + 11, 20)
+	Outline.Size = UDim2.fromOffset(((#AnimatedText / 1.6) * 5) + 10, 20)
 	Outline.Visible = false
 	Outline.ZIndex = 50
 	Outline.Parent = Library.ScreenGUI
@@ -2736,13 +2736,13 @@ function Library:Watermark()
 
 	local UIGradient = Instance.new("UIGradient")
 	UIGradient.Parent = Title
-	UIGradient.Name = ""
+	UIGradient.Name = "Gradient"
 	UIGradient.Color = ColorSequence.new{
 		ColorSequenceKeypoint.new(0, Color3.fromRGB(255, 255, 255)),
 		ColorSequenceKeypoint.new(0.01, Library.Accent),
 		ColorSequenceKeypoint.new(1, Color3.fromRGB(255, 255, 255))
 	}
-	
+
 	table.insert(Library.ThemeObjects, UIGradient)
 
 	task.spawn(function()
