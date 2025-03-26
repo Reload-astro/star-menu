@@ -855,14 +855,17 @@ function Library:New(Properties)
 	--
 	Library:Connection(Players.LocalPlayer.CharacterAdded, function()
 		if Library.Folder and Library.Folder.Parent == ReplicatedStorage then
-			Library.Folder.Parent = PlayerGui
+			if PlayerGui:WaitForChild('Framework') then
+				Library.Folder.Parent = PlayerGui
+			end
 		end
 	end)
 	--
 	ScreenGui.DisplayOrder = 100
 	ScreenGui.ZIndexBehavior = Enum.ZIndexBehavior.Sibling
+	ScreenGui.Parent = Library.Folder
+	--
 	Library.ScreenGUI = ScreenGui
-	Library.ScreenGUI.Parent = Library.Folder
 	--
 	Outline.Name = "Outline"
 	Outline.Position = UDim2.new(0.5,0,0.5,0)

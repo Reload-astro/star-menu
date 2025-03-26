@@ -1,14 +1,13 @@
 local Decimals = 4
 local Clock = os.clock()
 
-local default_color = Color3.fromRGB(79, 155, 255)
 local Library = loadstring(game:HttpGet('https://raw.githubusercontent.com/Reload-astro/star-menu/refs/heads/main/source.lua'))({
     cheatname = 'Example',
     gamename = '[Menu Library]',
     fileext = '.cfg',
     logo = '140593867166824',
     icon = '140593867166824',
-    Accent = default_color
+    Accent = Color3.fromRGB(79, 155, 255)
 })
 
 local Window = Library:New({Size = UDim2.new(0, 600, 0, 500)})
@@ -90,10 +89,10 @@ LegitMain:List({
 LegitMain:Colorpicker({
     Name = 'Example Colorpicker',
     Flag = 'example_colorpicker',
-    Default = default_color
+    Default = Color3.fromRGB(255, 0, 0)
 })
 
-Library:Configs(ui.tabs['settings'])
+Library:Configs(Settings)
 
 local Time = (string.format("%."..tostring(Decimals).."f", os.clock() - Clock))
 Library:Notification(("Loaded In "..tostring(Time)), 6)
