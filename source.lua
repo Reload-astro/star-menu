@@ -2672,7 +2672,7 @@ end
 function Library:Watermark()
 	local Watermark = {}
 
-	local animated_text = Library:Animation( Library.cheatname .. " | Beta") 
+	local animated_text = Library:Animation("Cheat Name | Beta") 
 	--
 	local Outline = Instance.new("Frame")
 	Outline.Name = "Outline"
