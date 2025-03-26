@@ -854,8 +854,6 @@ function Library:New(Properties)
 	end)
 	--
 	Library:Connection(Players.LocalPlayer.CharacterAdded, function()
-		repeat task.wait() until PlayerGui:FindFirstChild("Framework")
-
 		if Library.Folder and Library.Folder.Parent == ReplicatedStorage then
 			Library.Folder.Parent = PlayerGui
 		end
