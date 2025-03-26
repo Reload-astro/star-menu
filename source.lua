@@ -196,13 +196,13 @@ do
 		return string.format("%.14g", Library.UnNamedFlags)
 	end
 	--
-	function Library.Animation(Text)
+	function Library.Animation(Properties)
 		local pattern = {}
-		for i = 1, tonumber(tostring(Text):len()) do
-			table.insert(pattern, string.sub(tostring(Text), 1, i))
+		for i = 1, tonumber(tostring(Properties.Text):len()) do
+			table.insert(pattern, string.sub(tostring(Properties.Text), 1, i))
 		end
-		for i = tonumber(tostring(Text):len()) - 1, 0, -1 do
-			table.insert(pattern, string.sub(tostring(Text), 1, i))
+		for i = tonumber(tostring(Properties.Text):len()) - 1, 0, -1 do
+			table.insert(pattern, string.sub(tostring(Properties.Text), 1, i))
 		end
 		return pattern
 	end
@@ -2672,7 +2672,7 @@ end
 function Library:Watermark()
 	local Watermark = {}
 
-	local animated_text = Library:Animation( Library.cheatname .. " | Beta") 
+	local animated_text = Library:Animation({Text = Library.cheatname .. " | Beta"}) 
 	--
 	local Outline = Instance.new("Frame")
 	Outline.Name = "Outline"
