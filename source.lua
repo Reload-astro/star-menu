@@ -2672,7 +2672,7 @@ end
 function Library:Watermark()
 	local Watermark = {}
 
-	local animated_text = Library:Animation({Text = Library.cheatname .. " | Beta"}) 
+	local animated_text = Library:Animation({Text = ""..Library.cheatname .. " | Beta"}) 
 	--
 	local Outline = Instance.new("Frame")
 	Outline.Name = "Outline"
@@ -2681,7 +2681,7 @@ function Library:Watermark()
 	Outline.BackgroundColor3 = Color3.fromRGB(50, 50, 50)
 	Outline.BorderColor3 = Color3.fromRGB(0, 0, 0)
 	Outline.Position = UDim2.new(1, -10, 0, 10)
-	Outline.Size = UDim2.fromOffset(100, 20)
+	Outline.Size = UDim2.fromOffset(((#animated_text / 1.6) * 5) + 13, 20)
 	Outline.Visible = false
 	Outline.ZIndex = 50
 	Outline.Parent = Library.ScreenGUI
