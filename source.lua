@@ -33,6 +33,7 @@ local Library = {
 	Holder = nil,
 	OldSize = nil,
 	ScreenGUI = nil,
+	KeybindPath = nil,
 	DropdownOpen = false,
 	OptionListOpen = false,
 	Accent = startupArgs.color or Color3.fromRGB(79, 155, 255),
@@ -2274,6 +2275,45 @@ function Sections:Colorpicker(Properties)
 	return Colorpicker
 end
 --
+function Library:NewKeybind(Properties)
+	local NewKeybind = {Text = Properties.text or Properties.Text or "[key] name"}
+
+	local keybind = Instance.new("TextLabel")
+	keybind.Parent = Library.KeybindPath
+	keybind.Name = ""
+	keybind.FontFace = Library.Font
+	keybind.LineHeight = 1.2000000476837158
+	keybind.TextStrokeTransparency = 0.5
+	keybind.AnchorPoint = Vector2.new(0.5, 0)
+	keybind.TextSize = 12
+	keybind.Size = UDim2.new(0, 0, 0, 11)
+	keybind.TextColor3 = Color3.fromRGB(170, 170, 170)
+	keybind.BorderColor3 = Color3.fromRGB(0, 0, 0)
+	keybind.Text = NewKeybind.Text
+	keybind.BackgroundTransparency = 1
+	keybind.Position = UDim2.new(0.5, 0, 0, 8)
+	keybind.BorderSizePixel = 0
+	keybind.Visible = true
+	keybind.TextYAlignment = Enum.TextYAlignment.Top
+	keybind.AutomaticSize = Enum.AutomaticSize.X
+	keybind.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+	
+	local UIPadding = Instance.new("UIPadding")
+	UIPadding.Parent = keybind
+	UIPadding.Name = ""
+	UIPadding.PaddingTop = UDim.new(0, 6)
+
+	function NewKeybind.SetVisible(bool) 
+		keybind.Visible = bool
+	end 
+
+	function NewKeybind.ChangeText(text)
+		keybind.Text = text
+	end 
+
+	return NewKeybind 
+end 
+--
 function Sections:Keybind(Properties)
 	local Properties = Properties or {}
 	local Keybind = {
@@ -2308,6 +2348,10 @@ function Sections:Keybind(Properties)
 	}
 	local Key
 	local State = false
+	local NewKeybind = nil
+	if Properties.Name ~= 'UI Toggle' then
+		NewKeybind = Library:NewKeybind({})
+	end
 	--
 	local NewKey = Instance.new("TextButton")
 	NewKey.Name = "NewKey"
@@ -2412,6 +2456,9 @@ function Sections:Keybind(Properties)
 			end
 			Keybind.Callback(newkey)
 		end
+		if Properties.Name and Properties.Name ~= 'UI Toggle' then
+			NewKeybind.ChangeText(KeyText.Text ..  " " .. Properties.Name)
+		end
 	end
 	--
 	set(Keybind.State)
@@ -2494,7 +2541,7 @@ function Sections:Keybind(Properties)
 	--
 	function Keybind:Set(key)
 		set(key)
-	end
+	end 
 
 	-- // Returning
 	return Keybind
@@ -2764,10 +2811,129 @@ function Library:Watermark()
 	return Watermark
 end
 --
+function Library:KeybindList()
+	local Keybind = {
+		KeybindActive = false,
+	}
+	--
+	local AnimatedText = Library:Animation('Keybind') 
+	--
+	local Outline = Instance.new("Frame")
+	Outline.Name = "Outline"
+	Outline.AnchorPoint = Vector2.new(1, 0)
+	Outline.AutomaticSize = Enum.AutomaticSize.X
+	Outline.BackgroundColor3 = Color3.fromRGB(50, 50, 50)
+	Outline.BorderColor3 = Color3.fromRGB(0, 0, 0)
+	Outline.Position = UDim2.new(1, -10, 0, 10)
+	Outline.Size = UDim2.fromOffset(((#AnimatedText / 1.6) * 5) + 10, 20)
+	Outline.Visible = false
+	Outline.ZIndex = 50
+	Outline.Parent = Library.ScreenGUI
+
+	local UICorner = Instance.new("UICorner")
+	UICorner.Name = "UICorner"
+	UICorner.CornerRadius = UDim.new(0, 4)
+	UICorner.Parent = Outline
+
+	local UIStroke = Instance.new("UIStroke")
+	UIStroke.Name = "UIStroke"
+	UIStroke.Parent = Outline
+
+	local Inline = Instance.new("Frame")
+	Inline.Name = "Inline"
+	Inline.BackgroundColor3 = Color3.fromRGB(13, 13, 13)
+	Inline.BorderColor3 = Color3.fromRGB(0, 0, 0)
+	Inline.BorderSizePixel = 0
+	Inline.Position = UDim2.fromOffset(1, 1)
+	Inline.Size = UDim2.new(1, -2, 1, -2)
+	Inline.ZIndex = 51
+	Inline.Parent = Outline
+
+	local UICorner2 = Instance.new("UICorner")
+	UICorner2.Name = "UICorner_2"
+	UICorner2.CornerRadius = UDim.new(0, 4)
+	UICorner2.Parent = Inline
+
+	local Title = Instance.new("TextLabel")
+	Title.Name = "Title"
+	Title.FontFace = Library.Font
+	Title.RichText = true
+	Title.Text = "Keybind"
+	Title.TextColor3 = Color3.fromRGB(255, 255, 255)
+	Title.TextSize = 13
+	Title.TextXAlignment = Enum.TextXAlignment.Left
+	Title.AutomaticSize = Enum.AutomaticSize.X
+	Title.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+	Title.BackgroundTransparency = 1
+	Title.BorderColor3 = Color3.fromRGB(0, 0, 0)
+	Title.BorderSizePixel = 0
+	Title.Position = UDim2.fromOffset(5, 0)
+	Title.Size = UDim2.fromScale(0, 1)
+	Title.Parent = Inline
+
+	local UIPadding = Instance.new("UIPadding")
+	UIPadding.Name = "UIPadding"
+	UIPadding.PaddingRight = UDim.new(0, 6)
+	UIPadding.Parent = Inline
+
+	local UIGradient = Instance.new("UIGradient")
+	UIGradient.Parent = Title
+	UIGradient.Name = "Gradient"
+	UIGradient.Color = ColorSequence.new{
+		ColorSequenceKeypoint.new(0, Color3.fromRGB(255, 255, 255)),
+		ColorSequenceKeypoint.new(0.01, Library.Accent),
+		ColorSequenceKeypoint.new(1, Color3.fromRGB(255, 255, 255))
+	}
+
+	table.insert(Library.ThemeObjects, UIGradient)
+
+	Library.KeybindPath = UIPadding
+
+	task.spawn(function()
+		while true do 
+			if Outline.Visible then 
+				for i = 1, #AnimatedText do 
+					task.wait(0.2)
+					Title.Text = AnimatedText[i]
+				end 
+			end 
+			task.wait(0.2)
+		end 
+	end)
+
+	task.spawn(function()
+		while true do
+			if Keybind.KeybindActive then
+				local foundVisible = false
+				for _, v in pairs(Library.KeybindPath:GetDescendants()) do
+					if v:IsA("TextLabel") and v.Visible then
+						foundVisible = true
+						break
+					end
+				end
+		
+				if foundVisible then
+					Outline.Visible = true
+				else
+					Outline.Visible = false
+				end 
+			end            
+			task.wait()
+		end
+	end)
+
+	function Keybind:SetVisible(State)
+		Outline.Visible = State
+	end
+
+	return Keybind
+end
+--
 function Library:Configs(tab)
 	local cfgs = tab:Section({Name = "Config", Side = "Left", Size = 427})
 	local window = tab:Section({Name = "Window", Side = "Right", Size = 427})
 	local watermark = Library:Watermark()
+	local keybindlist = Library:KeybindList()
 
 	local cfg_list = cfgs:List({Name = "Config List", Flag = "setting_configuration_list", Options = {}})
 	cfgs:Textbox({Flag = "settings_configuration_name", Placeholder = "Config name"})
@@ -2836,6 +3002,10 @@ function Library:Configs(tab)
 
 	window:Toggle({Name = "Watermark", Flag = "ui_watermark", Callback = function(state)
 		watermark:SetVisible(state)
+	end})
+
+	window:Toggle({Name = "Keybind", Flag = "ui_keybind", Callback = function(state)
+		keybindlist:SetVisible(state)
 	end})
 
 	window:Colorpicker({Name = "Menu Accent", Flag = "MenuAccent", Default = Library.Accent, Callback = function(state)
