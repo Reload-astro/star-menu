@@ -2166,7 +2166,7 @@ function Sections:Colorpicker(Properties)
 	NewColor.FontFace = Library.Font
 	NewColor.Text = ""
 	NewColor.TextColor3 = Color3.fromRGB(0, 0, 0)
-	NewColor.TextSize = 14
+	NewColor.TextSize = Library.FontSize
 	NewColor.AutoButtonColor = false
 	NewColor.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
 	NewColor.BackgroundTransparency = 1
@@ -2181,7 +2181,7 @@ function Sections:Colorpicker(Properties)
 	ToggleTitle.FontFace = Library.Font
 	ToggleTitle.Text = Colorpicker.Name
 	ToggleTitle.TextColor3 = Color3.fromRGB(200, 200, 200)
-	ToggleTitle.TextSize = 13
+	ToggleTitle.TextSize = Library.FontSize
 	ToggleTitle.TextXAlignment = Enum.TextXAlignment.Left
 	ToggleTitle.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
 	ToggleTitle.BackgroundTransparency = 1
