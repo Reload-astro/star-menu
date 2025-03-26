@@ -198,11 +198,11 @@ do
 	--
 	function Library.Animation(Text)
 		local pattern = {}
-		for i = 1, tonumber(Text:len()) do
-			table.insert(pattern, string.sub(Text, 1, i))
+		for i = 1, tonumber(tostring(Text):len()) do
+			table.insert(pattern, string.sub(tostring(Text), 1, i))
 		end
-		for i = tonumber(Text:len()) - 1, 0, -1 do
-			table.insert(pattern, string.sub(Text, 1, i))
+		for i = tonumber(tostring(Text):len()) - 1, 0, -1 do
+			table.insert(pattern, string.sub(tostring(Text), 1, i))
 		end
 		return pattern
 	end
@@ -2672,7 +2672,7 @@ end
 function Library:Watermark()
 	local Watermark = {}
 
-	local animated_text = Library:Animation("Cheat Name | Beta") 
+	local animated_text = Library:Animation( Library.cheatname .. " | Beta") 
 	--
 	local Outline = Instance.new("Frame")
 	Outline.Name = "Outline"
