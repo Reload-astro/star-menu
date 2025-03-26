@@ -2826,6 +2826,7 @@ function Library:KeybindList()
 	Outline.BorderColor3 = Color3.fromRGB(0, 0, 0)
 	Outline.Position = UDim2.new(1, -10, 0, 10)
 	Outline.Size = UDim2.fromOffset(((#AnimatedText / 1.6) * 5) + 10, 20)
+	Outline.Dragging = true and Library.Open
 	Outline.Visible = false
 	Outline.ZIndex = 50
 	Outline.Parent = Library.ScreenGUI
