@@ -2456,9 +2456,6 @@ function Sections:Keybind(Properties)
 			end
 			Keybind.Callback(newkey)
 		end
-		if Properties.Name and Properties.Name ~= 'UI Toggle' then
-			NewKeybind.ChangeText(KeyText.Text ..  " " .. Properties.Name)
-		end
 	end
 	--
 	set(Keybind.State)
@@ -2542,6 +2539,10 @@ function Sections:Keybind(Properties)
 	function Keybind:Set(key)
 		set(key)
 	end 
+
+	if Properties.Name and Properties.Name ~= 'UI Toggle' then
+		NewKeybind.ChangeText(KeyText.Text ..  " " .. Properties.Name)
+	end
 
 	-- // Returning
 	return Keybind
@@ -2888,7 +2889,7 @@ function Library:KeybindList()
 
 	table.insert(Library.ThemeObjects, UIGradient)
 
-	Library.KeybindPath = UIPadding
+	Library.KeybindPath = Outline
 
 	task.spawn(function()
 		while true do 
@@ -2900,25 +2901,6 @@ function Library:KeybindList()
 			end 
 			task.wait(0.2)
 		end 
-	end)
-
-	task.spawn(function()
-		while true do
-			local foundVisible = false
-			for _, v in pairs(Library.KeybindPath:GetDescendants()) do
-				if v:IsA("TextLabel") and v.Visible then
-					foundVisible = true
-					break
-				end
-			end
-	
-			if foundVisible then
-				Outline.Visible = true
-			else
-				Outline.Visible = false
-			end 
-			task.wait()
-		end
 	end)
 
 	function Keybind:SetVisible(State)
