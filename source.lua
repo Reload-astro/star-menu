@@ -2415,7 +2415,7 @@ function Sections:Keybind(Properties)
 						input.UserInputType == Enum.UserInputType.Keyboard and input.KeyCode
 							or input.UserInputType
 					)
-					Library:Disconnect(Keybind.Binding)
+					Keybind.Binding:Disconnect()
 					task.wait()
 					Keybind.Binding = nil
 					TweenService:Create(KeyText, TweenInfo.new(0.25, Enum.EasingStyle.Quad, Enum.EasingDirection.Out), {TextColor3 = Color3.fromRGB(200, 200, 200)}):Play()
