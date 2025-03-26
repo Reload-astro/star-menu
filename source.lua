@@ -196,9 +196,16 @@ do
 		return string.format("%.14g", Library.UnNamedFlags)
 	end
 	--
-	function Library.Animation(text) 
-		local pattern = {} for i = 1, tonumber(text:len()) do table.insert(pattern, string.sub(text, 1, i)) end for i = tonumber(text:len()) - 1, 0, -1 do table.insert(pattern, string.sub(text, 1, i)) end return pattern 
-	end 
+	function Library.Animation(Text)
+		local pattern = {}
+		for i = 1, tonumber(Text:len()) do
+			table.insert(pattern, string.sub(Text, 1, i))
+		end
+		for i = tonumber(Text:len()) - 1, 0, -1 do
+			table.insert(pattern, string.sub(Text, 1, i))
+		end
+		return pattern
+	end
 	--
 	function Library:GetConfig()
 		local Config = ""
@@ -2656,11 +2663,9 @@ function Sections:Button(Properties)
 	end)
 end
 --
-function Library:Watermark(Properties)
-	local Watermark = {
-		Name = (Properties.Name or Properties.name or Library.cheatname..' '..Library.gamename),
-	}
-
+function Library:Watermark()
+	local Watermark = {}
+	
 	local animated_text = Library:Animation( Library.cheatname .. " | Beta") 
 	--
 	local Outline = Instance.new("Frame")
@@ -2745,7 +2750,7 @@ end
 function Library:Configs(tab)
 	local cfgs = tab:Section({Name = "Config", Side = "Left", Size = 427})
 	local window = tab:Section({Name = "Window", Side = "Right", Size = 427})
-	local watermark = Library:Watermark({Name = Library.cheatname..Library.gamename})
+	local watermark = Library:Watermark()
 
 	local cfg_list = cfgs:List({Name = "Config List", Flag = "setting_configuration_list", Options = {}})
 	cfgs:Textbox({Flag = "settings_configuration_name", Placeholder = "Config name"})
