@@ -2163,7 +2163,7 @@ function Sections:Colorpicker(Properties)
 	--
 	local NewColor = Instance.new("TextButton")
 	NewColor.Name = "NewColor"
-	NewColor.FontFace = Font.new("rbxasset://fonts/families/SourceSansPro.json")
+	NewColor.FontFace = Library.Font
 	NewColor.Text = ""
 	NewColor.TextColor3 = Color3.fromRGB(0, 0, 0)
 	NewColor.TextSize = 14
@@ -2292,7 +2292,7 @@ function Sections:Keybind(Properties)
 	--
 	local NewKey = Instance.new("TextButton")
 	NewKey.Name = "NewKey"
-	NewKey.FontFace = Font.new("rbxasset://fonts/families/SourceSansPro.json")
+	NewKey.FontFace = Library.Font
 	NewKey.Text = ""
 	NewKey.TextColor3 = Color3.fromRGB(0, 0, 0)
 	NewKey.TextSize = Library.FontSize
@@ -2599,7 +2599,7 @@ function Sections:Button(Properties)
 	--
 	local NewButton = Instance.new("TextButton")
 	NewButton.Name = "NewButton"
-	NewButton.FontFace = Font.new("rbxasset://fonts/families/SourceSansPro.json")
+	NewButton.FontFace = Library.Font
 	NewButton.Text = ""
 	NewButton.TextColor3 = Color3.fromRGB(0, 0, 0)
 	NewButton.TextSize = 14
