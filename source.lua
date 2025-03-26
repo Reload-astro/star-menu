@@ -2826,7 +2826,7 @@ function Library:KeybindList()
 	Outline.BorderColor3 = Color3.fromRGB(0, 0, 0)
 	Outline.Position = UDim2.new(1, -10, 0, 10)
 	Outline.Size = UDim2.fromOffset(((#AnimatedText / 1.6) * 5) + 10, 20)
-	Outline.Dragging = true and Library.Open
+	Outline.Draggable = true and Library.Open
 	Outline.Visible = false
 	Outline.ZIndex = 50
 	Outline.Parent = Library.ScreenGUI
@@ -2904,21 +2904,19 @@ function Library:KeybindList()
 
 	task.spawn(function()
 		while true do
-			if Keybind.KeybindActive then
-				local foundVisible = false
-				for _, v in pairs(Library.KeybindPath:GetDescendants()) do
-					if v:IsA("TextLabel") and v.Visible then
-						foundVisible = true
-						break
-					end
+			local foundVisible = false
+			for _, v in pairs(Library.KeybindPath:GetDescendants()) do
+				if v:IsA("TextLabel") and v.Visible then
+					foundVisible = true
+					break
 				end
-		
-				if foundVisible then
-					Outline.Visible = true
-				else
-					Outline.Visible = false
-				end 
-			end            
+			end
+	
+			if foundVisible then
+				Outline.Visible = true
+			else
+				Outline.Visible = false
+			end  
 			task.wait()
 		end
 	end)
