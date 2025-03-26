@@ -351,6 +351,12 @@ do
 				theme.ImageColor3 = Library.Accent
 			elseif theme:IsA("ScrollingFrame") then
 				theme.ScrollBarImageColor3 = Library.Accent
+			elseif theme:IsA("UIGradient") then
+				theme.Color = ColorSequence.new{
+					ColorSequenceKeypoint.new(0, Color3.fromRGB(255, 255, 255)),
+					ColorSequenceKeypoint.new(0.01, Library.Accent),
+					ColorSequenceKeypoint.new(1, Color3.fromRGB(255, 255, 255))
+				}
 			end
 		end
 	end
@@ -2665,7 +2671,7 @@ end
 --
 function Library:Watermark()
 	local Watermark = {}
-	
+
 	local animated_text = Library:Animation( Library.cheatname .. " | Beta") 
 	--
 	local Outline = Instance.new("Frame")
@@ -2697,6 +2703,7 @@ function Library:Watermark()
 	Inline.Position = UDim2.fromOffset(1, 1)
 	Inline.Size = UDim2.new(1, -2, 1, -2)
 	Inline.ZIndex = 51
+	Inline.Parent = Outline
 
 	local UICorner2 = Instance.new("UICorner")
 	UICorner2.Name = "UICorner_2"
@@ -2725,18 +2732,25 @@ function Library:Watermark()
 	UIPadding.PaddingRight = UDim.new(0, 6)
 	UIPadding.Parent = Inline
 
-	Inline.Parent = Outline
-
+	local UIGradient = Instance.new("UIGradient")
+	UIGradient.Parent = Title
+	UIGradient.Name = ""
+	UIGradient.Color = ColorSequence.new{
+		ColorSequenceKeypoint.new(0, Color3.fromRGB(255, 255, 255)),
+		ColorSequenceKeypoint.new(0.01, Library.Accent),
+		ColorSequenceKeypoint.new(1, Color3.fromRGB(255, 255, 255))
+	}
+	table.insert(Library.ThemeObjects, UIGradient)
 
 	task.spawn(function()
 		while true do 
 			if Outline.Visible then 
 				for i = 1, #animated_text do 
-					task.wait(.2)
+					task.wait(0.2)
 					Title.Text = animated_text[i]
 				end 
 			end 
-			task.wait(.2)
+			task.wait(0.2)
 		end 
 	end)
 
