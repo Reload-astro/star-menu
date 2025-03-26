@@ -196,13 +196,13 @@ do
 		return string.format("%.14g", Library.UnNamedFlags)
 	end
 	--
-	function Library.Animation(Properties)
+	function Library.Animation(Text)
 		local pattern = {}
-		for i = 1, tonumber(tostring(Properties.Text):len()) do
-			table.insert(pattern, string.sub(tostring(Properties.Text), 1, i))
+		for i = 1, tonumber(tostring(Text):len()) do
+			table.insert(pattern, string.sub(tostring(Text), 1, i))
 		end
-		for i = tonumber(tostring(Properties.Text):len()) - 1, 0, -1 do
-			table.insert(pattern, string.sub(tostring(Properties.Text), 1, i))
+		for i = tonumber(tostring(Text):len()) - 1, 0, -1 do
+			table.insert(pattern, string.sub(tostring(Text), 1, i))
 		end
 		return pattern
 	end
@@ -2672,7 +2672,7 @@ end
 function Library:Watermark()
 	local Watermark = {}
 
-	local animated_text = Library:Animation({Text = ""..Library.cheatname .. " | Beta"}) 
+	local animated_text = Library:Animation(""..Library.cheatname .. " | Beta") 
 	--
 	local Outline = Instance.new("Frame")
 	Outline.Name = "Outline"
@@ -2681,7 +2681,7 @@ function Library:Watermark()
 	Outline.BackgroundColor3 = Color3.fromRGB(50, 50, 50)
 	Outline.BorderColor3 = Color3.fromRGB(0, 0, 0)
 	Outline.Position = UDim2.new(1, -10, 0, 10)
-	Outline.Size = UDim2.fromOffset(((#animated_text / 1.6) * 5) + 13, 20)
+	Outline.Size = UDim2.fromOffset(((#animated_text / 1.6) * 5) + 11, 20)
 	Outline.Visible = false
 	Outline.ZIndex = 50
 	Outline.Parent = Library.ScreenGUI
