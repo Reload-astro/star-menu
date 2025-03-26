@@ -2539,26 +2539,6 @@ function Sections:Keybind(Properties)
 	Flags[Keybind.Flag .. "_KEY"] = set
 	Flags[Keybind.Flag .. "_KEY STATE"] = set
 	--
-
-	task.spawn(function()
-		while true do
-			local foundVisible = false
-			for _, v in pairs(Library.KeybindPath:GetDescendants()) do
-				if v:IsA("TextLabel") and v.Visible then
-					foundVisible = true
-					break
-				end
-			end
-	
-			if foundVisible then
-				Library.KeybindPath.Visible = true
-			else
-				Library.KeybindPath.Visible = false
-			end       
-			task.wait()
-		end
-	end)
-
 	function Keybind:Set(key)
 		set(key)
 	end 
@@ -2920,6 +2900,25 @@ function Library:KeybindList()
 			end 
 			task.wait(0.2)
 		end 
+	end)
+
+	task.spawn(function()
+		while true do
+			local foundVisible = false
+			for _, v in pairs(Library.KeybindPath:GetDescendants()) do
+				if v:IsA("TextLabel") and v.Visible then
+					foundVisible = true
+					break
+				end
+			end
+	
+			if foundVisible then
+				Outline.Visible = true
+			else
+				Outline.Visible = false
+			end 
+			task.wait()
+		end
 	end)
 
 	function Keybind:SetVisible(State)
