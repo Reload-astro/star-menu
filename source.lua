@@ -2671,7 +2671,7 @@ end
 --
 function Library:Watermark()
 	local Watermark = {}
-
+	--
 	local animated_text = Library:Animation(""..Library.cheatname .. " | Beta") 
 	--
 	local Outline = Instance.new("Frame")
