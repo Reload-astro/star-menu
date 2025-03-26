@@ -2322,7 +2322,7 @@ function Sections:Keybind(Properties)
 	local KeyText = Instance.new("TextLabel")
 	KeyText.Name = "KeyText"
 	KeyText.FontFace = Library.Font
-	KeyText.Text = "None"
+	KeyText.Text = "[None]"
 	KeyText.TextColor3 = Color3.fromRGB(200, 200, 200)
 	KeyText.TextSize = 13
 	KeyText.TextXAlignment = Enum.TextXAlignment.Right
@@ -2357,9 +2357,9 @@ function Sections:Keybind(Properties)
 					end
 					Keybind.Callback(Key)
 				end
-				local text = "None"
+				local text = "[None]"
 
-				KeyText.Text = text
+				KeyText.Text = "["..text.."]"
 			elseif newkey ~= nil then
 				Key = newkey
 				if Keybind.UseKey then
@@ -2370,7 +2370,7 @@ function Sections:Keybind(Properties)
 				end
 				local text = (Library.Keys[newkey] or tostring(newkey):gsub("Enum.KeyCode.", ""))
 
-				KeyText.Text = text
+				KeyText.Text = "["..text.."]"
 			end
 
 			Library.Flags[Keybind.Flag .. "_KEY"] = newkey
