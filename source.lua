@@ -854,12 +854,13 @@ function Library:New(Properties)
 	end)
 	--
 	Library:Connection(Players.LocalPlayer.CharacterAdded, function()
+		repeat task.wait() until PlayerGui:FindFirstChild("Framework")
+
 		if Library.Folder and Library.Folder.Parent == ReplicatedStorage then
-			if PlayerGui:WaitForChild('Framework') then
-				Library.Folder.Parent = PlayerGui
-			end
+			Library.Folder.Parent = PlayerGui
 		end
 	end)
+	
 	--
 	ScreenGui.DisplayOrder = 100
 	ScreenGui.ZIndexBehavior = Enum.ZIndexBehavior.Sibling
