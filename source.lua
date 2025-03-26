@@ -2295,7 +2295,7 @@ function Sections:Keybind(Properties)
 	NewKey.FontFace = Font.new("rbxasset://fonts/families/SourceSansPro.json")
 	NewKey.Text = ""
 	NewKey.TextColor3 = Color3.fromRGB(0, 0, 0)
-	NewKey.TextSize = 14
+	NewKey.TextSize = Library.FontSize
 	NewKey.AutoButtonColor = false
 	NewKey.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
 	NewKey.BackgroundTransparency = 1
@@ -2310,7 +2310,7 @@ function Sections:Keybind(Properties)
 	ToggleTitle.FontFace = Library.Font
 	ToggleTitle.Text = Keybind.Name
 	ToggleTitle.TextColor3 = Color3.fromRGB(200, 200, 200)
-	ToggleTitle.TextSize = 13
+	ToggleTitle.TextSize = Library.FontSize
 	ToggleTitle.TextXAlignment = Enum.TextXAlignment.Left
 	ToggleTitle.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
 	ToggleTitle.BackgroundTransparency = 1
@@ -2324,7 +2324,7 @@ function Sections:Keybind(Properties)
 	KeyText.FontFace = Library.Font
 	KeyText.Text = "[None]"
 	KeyText.TextColor3 = Color3.fromRGB(200, 200, 200)
-	KeyText.TextSize = 13
+	KeyText.TextSize = Library.FontSize
 	KeyText.TextXAlignment = Enum.TextXAlignment.Right
 	KeyText.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
 	KeyText.BackgroundTransparency = 1
