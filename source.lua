@@ -2816,7 +2816,7 @@ function Library:KeybindList()
 		KeybindActive = false,
 	}
 	--
-	local AnimatedText = Library:Animation('Keybind') 
+	local AnimatedText = Library:Animation('    Keybind    ')
 	--
 	local Outline = Instance.new("Frame")
 	Outline.Name = "Outline"
