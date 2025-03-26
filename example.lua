@@ -2,8 +2,8 @@ local Decimals = 4
 local Clock = os.clock()
 
 local Library = loadstring(game:HttpGet('https://raw.githubusercontent.com/Reload-astro/star-menu/refs/heads/main/source.lua'))({
-    cheatname = 'Example',
-    gamename = '[Menu Library]',
+    cheatname = 'Menu Library',
+    gamename = 'Unknown',
     fileext = '.cfg',
     logo = '140593867166824',
     icon = '140593867166824',
