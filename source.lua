@@ -2779,6 +2779,19 @@ function Library:Watermark()
 	UIStroke.Name = "UIStroke"
 	UIStroke.Parent = Outline
 
+	local Glow = Instance.new('ImageLabel')
+	Glow.Name = "Glow"
+	Glow.BackgroundTransparency = 1
+	Glow.Position = UDim2.new(0, -15, 0, -15)
+	Glow.Size = UDim2.new(1, 30, 1, 30)
+	Glow.ZIndex = 0
+	Glow.Image = "rbxassetid://5028857084"
+	Glow.ImageColor3 = Library.Accent
+	Glow.ScaleType = Enum.ScaleType.Slice
+	Glow.SliceCenter = Rect.new(24, 24, 276, 276)
+	Glow.Parent = Outline
+	table.insert(Library.ThemeObjects, Glow)
+
 	local Inline = Instance.new("Frame")
 	Inline.Name = "Inline"
 	Inline.BackgroundColor3 = Color3.fromRGB(13, 13, 13)
@@ -2873,6 +2886,19 @@ function Library:KeybindList()
 	local UIStroke = Instance.new("UIStroke")
 	UIStroke.Name = "UIStroke"
 	UIStroke.Parent = Outline
+
+	local Glow = Instance.new('ImageLabel')
+	Glow.Name = "Glow"
+	Glow.BackgroundTransparency = 1
+	Glow.Position = UDim2.new(0, -15, 0, -15)
+	Glow.Size = UDim2.new(1, 30, 1, 30)
+	Glow.ZIndex = 0
+	Glow.Image = "rbxassetid://5028857084"
+	Glow.ImageColor3 = Library.Accent
+	Glow.ScaleType = Enum.ScaleType.Slice
+	Glow.SliceCenter = Rect.new(24, 24, 276, 276)
+	Glow.Parent = Outline
+	table.insert(Library.ThemeObjects, Glow)
 
 	local Inline = Instance.new("Frame")
 	Inline.Name = "Inline"
