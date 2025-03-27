@@ -2985,7 +2985,7 @@ function Library:Panel(Properties)
 	aimbot.Size = UDim2.new(0, 0, 0, 11)
 	aimbot.TextColor3 = Color3.fromRGB(170, 170, 170)
 	aimbot.BorderColor3 = Color3.fromRGB(0, 0, 0)
-	aimbot.Text = Panel.nam
+	aimbot.Text = Panel.Name
 	aimbot.BackgroundTransparency = 1
 	aimbot.Position = UDim2.new(0.5, 0, 0, 8)
 	aimbot.BorderSizePixel = 0
