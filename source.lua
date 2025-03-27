@@ -173,6 +173,39 @@ do
 		return ins 
 	end
 	--
+	function Library:Tween(obj, info, properties, callback)
+		local anim = TweenService:Create(obj, TweenInfo.new(unpack(info)), properties)
+		anim:Play()
+	
+		if callback then anim.Completed:Connect(callback) end
+	end
+	--
+	function Library:Drag(obj, dragSpeed)
+		local start, objPosition, dragging
+		obj.InputBegan:Connect(function(input)
+			if input.UserInputType == Enum.UserInputType.MouseButton1 then
+				dragging = true
+				start = input.Position
+				objPosition = obj.Position
+			end
+		end)
+	
+		obj.InputEnded:Connect(function(input)
+			if input.UserInputType == Enum.UserInputType.MouseButton1	 then
+				dragging = false
+			end
+		end)
+	
+		UserInputService.InputChanged:Connect(function(input)
+			if input.UserInputType == Enum.UserInputType.MouseMovement	 and
+				dragging then
+				Library:Tween(obj, {dragSpeed}, {
+					Position = UDim2.new(objPosition.X.Scale, objPosition.X.Offset + (input.Position - start).X, objPosition.Y.Scale, objPosition.Y.Offset + (input.Position - start).Y)
+				})
+			end
+		end) 
+	end
+	--
 	function Library:Unload()
 		Library.ScreenGUI:Destroy() 
 		Library.Folder:Destroy()
@@ -2827,7 +2860,6 @@ function Library:KeybindList()
 	Outline.BackgroundColor3 = Color3.fromRGB(50, 50, 50)
 	Outline.BorderColor3 = Color3.fromRGB(0, 0, 0)
 	Outline.Position = UDim2.new(0, 20, 0.5, 0)
-	Outline.Draggable = true
 	Outline.Size = UDim2.fromOffset(((#AnimatedText / 1.6) * 5) + 10, 20)
 	Outline.Visible = false
 	Outline.ZIndex = 50
@@ -2928,6 +2960,8 @@ function Library:KeybindList()
 		Outline.Visible = State
 		KeybindList.KeybindActive = State
 	end
+
+	Library:Drag(Outline, 0.1)
 
 	return KeybindList
 end
