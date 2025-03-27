@@ -2946,7 +2946,7 @@ function Library:KeybindList()
 		ColorSequenceKeypoint.new(1, Color3.fromRGB(255, 255, 255))
 	}
 
-	Library.KeybindPath = Inline
+	Library.KeybindPath = Outline
 	table.insert(Library.ThemeObjects, UIGradient)
 
 	task.spawn(function()
