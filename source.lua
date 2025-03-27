@@ -2458,8 +2458,8 @@ function Sections:Keybind(Properties)
 			Keybind.Callback(newkey)
 		end
 		if Keybind.Name and Keybind.Name ~= 'UI Toggle' then
-			key.change_text(KeyText.Text ..  " " .. Keybind.Name .. " (" .. Keybind.Mode  .. ")")
-			key.set_visible(Library.Flags[Keybind.Flag])
+			key.ChangeText(KeyText.Text ..  " " .. Keybind.Name .. " (" .. Keybind.Mode  .. ")")
+			key.SetVisible(Library.Flags[Keybind.Flag])
 		end 
 	end
 	--
@@ -2814,7 +2814,7 @@ function Library:Watermark()
 end
 --
 function Library:KeybindList()
-	local Keybind = {
+	local KeybindList = {
 		KeybindActive = false,
 	}
 	--
@@ -2905,7 +2905,7 @@ function Library:KeybindList()
 
 	task.spawn(function()
 		while true do
-			if Keybind.KeybindActive then
+			if KeybindList.KeybindActive then
 				local foundVisible = false
 				for _, v in pairs(Library.KeybindPath:GetDescendants()) do
 					if v:IsA("TextLabel") and v.Visible then
@@ -2924,12 +2924,12 @@ function Library:KeybindList()
 		end
 	end)
 
-	function Keybind:SetVisible(State)
+	function KeybindList:SetVisible(State)
 		Outline.Visible = State
-		Keybind.KeybindActive = State
+		KeybindList.KeybindActive = State
 	end
 
-	return Keybind
+	return KeybindList
 end
 --
 function Library:Configs(tab)
