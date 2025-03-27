@@ -2349,9 +2349,9 @@ function Sections:Keybind(Properties)
 	local Key
 	local State = false
 	--
-	local key = nil
+	local NewKeybind = nil
 	if Keybind.Name ~= 'UI Toggle' then
-		key = Library:NewKeybind({})
+		NewKeybind = Library:NewKeybind({})
 	end
 	--
 	local NewKey = Instance.new("TextButton")
@@ -2458,8 +2458,8 @@ function Sections:Keybind(Properties)
 			Keybind.Callback(newkey)
 		end
 		if Keybind.Name and Keybind.Name ~= 'UI Toggle' then
-			key.ChangeText(KeyText.Text ..  " " .. Keybind.Name .. " (" .. Keybind.Mode  .. ")")
-			key.SetVisible(Library.Flags[Keybind.Flag])
+			NewKeybind.ChangeText(KeyText.Text ..  " " .. Keybind.Name .. " (" .. Keybind.Mode  .. ")")
+			NewKeybind.SetVisible(Library.Flags[Keybind.Flag])
 		end 
 	end
 	--
