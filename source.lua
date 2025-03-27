@@ -2909,7 +2909,7 @@ function Library:Panel(Properties)
 	}
 
 	local panel_main_frame = Instance.new('Frame')
-	panel_main_frame.Parent = Library.gui
+	panel_main_frame.Parent = Library.ScreenGUI
 	panel_main_frame.Name = ""
 	panel_main_frame.BackgroundTransparency = 0.4000000059604645
 	panel_main_frame.Size = UDim2.new(1, 0, 1, 0)
