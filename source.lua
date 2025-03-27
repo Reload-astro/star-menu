@@ -2856,10 +2856,10 @@ function Library:KeybindList()
 	local Outline = Instance.new("Frame")
 	Outline.Name = "Outline"
 	Outline.AnchorPoint = Vector2.new(1, 0)
-	Outline.AutomaticSize = Enum.AutomaticSize.X
+	Outline.AutomaticSize = Enum.AutomaticSize.XY
 	Outline.BackgroundColor3 = Color3.fromRGB(50, 50, 50)
 	Outline.BorderColor3 = Color3.fromRGB(0, 0, 0)
-	Outline.Position = UDim2.new(0, 20, 0.5, 0)
+	Outline.Position = UDim2.new(0, 15, 0.5, 0)
 	Outline.Size = UDim2.fromOffset(((#AnimatedText / 1.6) * 5) + 10, 20)
 	Outline.Visible = false
 	Outline.ZIndex = 50
