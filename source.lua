@@ -2308,6 +2308,219 @@ function Sections:Colorpicker(Properties)
 	return Colorpicker
 end
 --
+function Library:Watermark()
+	local Watermark = {}
+	--
+	local AnimatedText = Library:Animation(Library.cheatname..' | ['.. Library.gamename ..'] | Beta') 
+	--
+	local Outline = Instance.new("Frame")
+	Outline.Name = "Outline"
+	Outline.AnchorPoint = Vector2.new(1, 0)
+	Outline.AutomaticSize = Enum.AutomaticSize.X
+	Outline.BackgroundColor3 = Color3.fromRGB(50, 50, 50)
+	Outline.BorderColor3 = Color3.fromRGB(0, 0, 0)
+	Outline.Position = UDim2.new(1, -10, 0, 10)
+	Outline.Size = UDim2.fromOffset(((#AnimatedText / 1.6) * 5) + 10, 20)
+	Outline.Visible = false
+	Outline.ZIndex = 50
+	Outline.Parent = Library.ScreenGUI
+
+	local UICorner = Instance.new("UICorner")
+	UICorner.Name = "UICorner"
+	UICorner.CornerRadius = UDim.new(0, 4)
+	UICorner.Parent = Outline
+
+	local UIStroke = Instance.new("UIStroke")
+	UIStroke.Name = "UIStroke"
+	UIStroke.Parent = Outline
+
+	local Inline = Instance.new("Frame")
+	Inline.Name = "Inline"
+	Inline.BackgroundColor3 = Color3.fromRGB(13, 13, 13)
+	Inline.BorderColor3 = Color3.fromRGB(0, 0, 0)
+	Inline.BorderSizePixel = 0
+	Inline.Position = UDim2.fromOffset(1, 1)
+	Inline.Size = UDim2.new(1, -2, 1, -2)
+	Inline.ZIndex = 51
+	Inline.Parent = Outline
+
+	local UICorner2 = Instance.new("UICorner")
+	UICorner2.Name = "UICorner_2"
+	UICorner2.CornerRadius = UDim.new(0, 4)
+	UICorner2.Parent = Inline
+
+	local Title = Instance.new("TextLabel")
+	Title.Name = "Title"
+	Title.FontFace = Library.Font
+	Title.RichText = true
+	Title.Text = "Cheat Name | Beta"
+	Title.TextColor3 = Color3.fromRGB(255, 255, 255)
+	Title.TextSize = 13
+	Title.TextXAlignment = Enum.TextXAlignment.Left
+	Title.AutomaticSize = Enum.AutomaticSize.X
+	Title.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+	Title.BackgroundTransparency = 1
+	Title.BorderColor3 = Color3.fromRGB(0, 0, 0)
+	Title.BorderSizePixel = 0
+	Title.Position = UDim2.fromOffset(5, 0)
+	Title.Size = UDim2.fromScale(0, 1)
+	Title.Parent = Inline
+
+	local UIPadding = Instance.new("UIPadding")
+	UIPadding.Name = "UIPadding"
+	UIPadding.PaddingRight = UDim.new(0, 6)
+	UIPadding.Parent = Inline
+
+	local UIGradient = Instance.new("UIGradient")
+	UIGradient.Parent = Title
+	UIGradient.Name = "Gradient"
+	UIGradient.Color = ColorSequence.new{
+		ColorSequenceKeypoint.new(0, Color3.fromRGB(255, 255, 255)),
+		ColorSequenceKeypoint.new(0.01, Library.Accent),
+		ColorSequenceKeypoint.new(1, Color3.fromRGB(255, 255, 255))
+	}
+
+	table.insert(Library.ThemeObjects, UIGradient)
+
+	task.spawn(function()
+		while true do 
+			if Outline.Visible then 
+				for i = 1, #AnimatedText do 
+					task.wait(0.2)
+					Title.Text = AnimatedText[i]
+				end 
+			end 
+			task.wait(0.2)
+		end 
+	end)
+
+	function Watermark:SetVisible(State)
+		Outline.Visible = State
+	end
+
+	return Watermark
+end
+--
+function Library:KeybindList()
+	local KeybindList = {
+		KeybindActive = false,
+	}
+	--
+	local AnimatedText = Library:Animation('Keybind List') 
+	--
+	local Outline = Instance.new("Frame")
+	Outline.Name = "Outline"
+	Outline.AnchorPoint = Vector2.new(1, 0)
+	Outline.AutomaticSize = Enum.AutomaticSize.X
+	Outline.BackgroundColor3 = Color3.fromRGB(50, 50, 50)
+	Outline.BorderColor3 = Color3.fromRGB(0, 0, 0)
+	Outline.Position = UDim2.new(0, 30, 0.5, 0)
+	Outline.Size = UDim2.fromOffset(((#AnimatedText / 1.6) * 5) + 10, 20)
+	Outline.Visible = false
+	Outline.ZIndex = 50
+	Outline.Parent = Library.ScreenGUI
+
+	local UICorner = Instance.new("UICorner")
+	UICorner.Name = "UICorner"
+	UICorner.CornerRadius = UDim.new(0, 4)
+	UICorner.Parent = Outline
+
+	local UIStroke = Instance.new("UIStroke")
+	UIStroke.Name = "UIStroke"
+	UIStroke.Parent = Outline
+
+	local Inline = Instance.new("Frame")
+	Inline.Name = "Inline"
+	Inline.BackgroundColor3 = Color3.fromRGB(13, 13, 13)
+	Inline.BorderColor3 = Color3.fromRGB(0, 0, 0)
+	Inline.BorderSizePixel = 0
+	Inline.Position = UDim2.fromOffset(1, 1)
+	Inline.Size = UDim2.new(1, -2, 1, -2)
+	Inline.ZIndex = 51
+	Inline.Parent = Outline
+
+	local UICorner2 = Instance.new("UICorner")
+	UICorner2.Name = "UICorner_2"
+	UICorner2.CornerRadius = UDim.new(0, 4)
+	UICorner2.Parent = Inline
+
+	local Title = Instance.new("TextLabel")
+	Title.Name = "Title"
+	Title.FontFace = Library.Font
+	Title.RichText = true
+	Title.Text = 'Keybind List'
+	Title.TextColor3 = Color3.fromRGB(255, 255, 255)
+	Title.TextSize = 13
+	Title.TextXAlignment = Enum.TextXAlignment.Left
+	Title.AutomaticSize = Enum.AutomaticSize.X
+	Title.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+	Title.BackgroundTransparency = 1
+	Title.BorderColor3 = Color3.fromRGB(0, 0, 0)
+	Title.BorderSizePixel = 0
+	Title.Position = UDim2.fromOffset(5, 0)
+	Title.Size = UDim2.fromScale(0, 1)
+	Title.Parent = Inline
+
+	local UIPadding = Instance.new("UIPadding")
+	UIPadding.Name = "UIPadding"
+	UIPadding.PaddingRight = UDim.new(0, 6)
+	UIPadding.Parent = Inline
+
+	local UIGradient = Instance.new("UIGradient")
+	UIGradient.Parent = Title
+	UIGradient.Name = "Gradient"
+	UIGradient.Color = ColorSequence.new{
+		ColorSequenceKeypoint.new(0, Color3.fromRGB(255, 255, 255)),
+		ColorSequenceKeypoint.new(0.01, Library.Accent),
+		ColorSequenceKeypoint.new(1, Color3.fromRGB(255, 255, 255))
+	}
+
+	Library.KeybindPath = Inline
+	table.insert(Library.ThemeObjects, UIGradient)
+
+	task.spawn(function()
+		while true do 
+			if Outline.Visible then 
+				for i = 1, #AnimatedText do 
+					task.wait(0.2)
+					Title.Text = AnimatedText[i]
+				end 
+			end 
+			task.wait(0.2)
+		end 
+	end)
+
+	task.spawn(function()
+		while true do
+			if KeybindList.KeybindActive then
+				local foundVisible = false
+				for _, v in pairs(Library.KeybindPath:GetDescendants()) do
+					if v:IsA("TextLabel") and v.Visible then
+						foundVisible = true
+						break
+					end
+				end
+		
+				if foundVisible then
+					Outline.Visible = true
+				else
+					Outline.Visible = false
+				end 
+			end            
+			task.wait()
+		end
+	end)
+
+	function KeybindList:SetVisible(State)
+		Outline.Visible = State
+		KeybindList.KeybindActive = State
+	end
+
+	Library:Drag(Outline, 0.1)
+
+	return KeybindList
+end
+--
 function Library:NewKeybind(Properties)
 	local NewKeybind = {Text = Properties.text or Properties.Text or "[key] name (mode)"}
 
@@ -2751,219 +2964,6 @@ function Sections:Button(Properties)
 			TweenService:Create(DropdownTitle, TweenInfo.new(0.1, Enum.EasingStyle.Quad, Enum.EasingDirection.Out), {TextColor3 = Color3.fromRGB(200,200,200)}):Play()
 		end)
 	end)
-end
---
-function Library:Watermark()
-	local Watermark = {}
-	--
-	local AnimatedText = Library:Animation(Library.cheatname..' | ['.. Library.gamename ..'] | Beta') 
-	--
-	local Outline = Instance.new("Frame")
-	Outline.Name = "Outline"
-	Outline.AnchorPoint = Vector2.new(1, 0)
-	Outline.AutomaticSize = Enum.AutomaticSize.X
-	Outline.BackgroundColor3 = Color3.fromRGB(50, 50, 50)
-	Outline.BorderColor3 = Color3.fromRGB(0, 0, 0)
-	Outline.Position = UDim2.new(1, -10, 0, 10)
-	Outline.Size = UDim2.fromOffset(((#AnimatedText / 1.6) * 5) + 10, 20)
-	Outline.Visible = false
-	Outline.ZIndex = 50
-	Outline.Parent = Library.ScreenGUI
-
-	local UICorner = Instance.new("UICorner")
-	UICorner.Name = "UICorner"
-	UICorner.CornerRadius = UDim.new(0, 4)
-	UICorner.Parent = Outline
-
-	local UIStroke = Instance.new("UIStroke")
-	UIStroke.Name = "UIStroke"
-	UIStroke.Parent = Outline
-
-	local Inline = Instance.new("Frame")
-	Inline.Name = "Inline"
-	Inline.BackgroundColor3 = Color3.fromRGB(13, 13, 13)
-	Inline.BorderColor3 = Color3.fromRGB(0, 0, 0)
-	Inline.BorderSizePixel = 0
-	Inline.Position = UDim2.fromOffset(1, 1)
-	Inline.Size = UDim2.new(1, -2, 1, -2)
-	Inline.ZIndex = 51
-	Inline.Parent = Outline
-
-	local UICorner2 = Instance.new("UICorner")
-	UICorner2.Name = "UICorner_2"
-	UICorner2.CornerRadius = UDim.new(0, 4)
-	UICorner2.Parent = Inline
-
-	local Title = Instance.new("TextLabel")
-	Title.Name = "Title"
-	Title.FontFace = Library.Font
-	Title.RichText = true
-	Title.Text = "Cheat Name | Beta"
-	Title.TextColor3 = Color3.fromRGB(255, 255, 255)
-	Title.TextSize = 13
-	Title.TextXAlignment = Enum.TextXAlignment.Left
-	Title.AutomaticSize = Enum.AutomaticSize.X
-	Title.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
-	Title.BackgroundTransparency = 1
-	Title.BorderColor3 = Color3.fromRGB(0, 0, 0)
-	Title.BorderSizePixel = 0
-	Title.Position = UDim2.fromOffset(5, 0)
-	Title.Size = UDim2.fromScale(0, 1)
-	Title.Parent = Inline
-
-	local UIPadding = Instance.new("UIPadding")
-	UIPadding.Name = "UIPadding"
-	UIPadding.PaddingRight = UDim.new(0, 6)
-	UIPadding.Parent = Inline
-
-	local UIGradient = Instance.new("UIGradient")
-	UIGradient.Parent = Title
-	UIGradient.Name = "Gradient"
-	UIGradient.Color = ColorSequence.new{
-		ColorSequenceKeypoint.new(0, Color3.fromRGB(255, 255, 255)),
-		ColorSequenceKeypoint.new(0.01, Library.Accent),
-		ColorSequenceKeypoint.new(1, Color3.fromRGB(255, 255, 255))
-	}
-
-	table.insert(Library.ThemeObjects, UIGradient)
-
-	task.spawn(function()
-		while true do 
-			if Outline.Visible then 
-				for i = 1, #AnimatedText do 
-					task.wait(0.2)
-					Title.Text = AnimatedText[i]
-				end 
-			end 
-			task.wait(0.2)
-		end 
-	end)
-
-	function Watermark:SetVisible(State)
-		Outline.Visible = State
-	end
-
-	return Watermark
-end
---
-function Library:KeybindList()
-	local KeybindList = {
-		KeybindActive = false,
-	}
-	--
-	local AnimatedText = Library:Animation('Keybind List') 
-	--
-	local Outline = Instance.new("Frame")
-	Outline.Name = "Outline"
-	Outline.AnchorPoint = Vector2.new(1, 0)
-	Outline.AutomaticSize = Enum.AutomaticSize.X
-	Outline.BackgroundColor3 = Color3.fromRGB(50, 50, 50)
-	Outline.BorderColor3 = Color3.fromRGB(0, 0, 0)
-	Outline.Position = UDim2.new(0, 30, 0.5, 0)
-	Outline.Size = UDim2.fromOffset(((#AnimatedText / 1.6) * 5) + 10, 20)
-	Outline.Visible = false
-	Outline.ZIndex = 50
-	Outline.Parent = Library.ScreenGUI
-
-	local UICorner = Instance.new("UICorner")
-	UICorner.Name = "UICorner"
-	UICorner.CornerRadius = UDim.new(0, 4)
-	UICorner.Parent = Outline
-
-	local UIStroke = Instance.new("UIStroke")
-	UIStroke.Name = "UIStroke"
-	UIStroke.Parent = Outline
-
-	local Inline = Instance.new("Frame")
-	Inline.Name = "Inline"
-	Inline.BackgroundColor3 = Color3.fromRGB(13, 13, 13)
-	Inline.BorderColor3 = Color3.fromRGB(0, 0, 0)
-	Inline.BorderSizePixel = 0
-	Inline.Position = UDim2.fromOffset(1, 1)
-	Inline.Size = UDim2.new(1, -2, 1, -2)
-	Inline.ZIndex = 51
-	Inline.Parent = Outline
-
-	local UICorner2 = Instance.new("UICorner")
-	UICorner2.Name = "UICorner_2"
-	UICorner2.CornerRadius = UDim.new(0, 4)
-	UICorner2.Parent = Inline
-
-	local Title = Instance.new("TextLabel")
-	Title.Name = "Title"
-	Title.FontFace = Library.Font
-	Title.RichText = true
-	Title.Text = 'Keybind List'
-	Title.TextColor3 = Color3.fromRGB(255, 255, 255)
-	Title.TextSize = 13
-	Title.TextXAlignment = Enum.TextXAlignment.Left
-	Title.AutomaticSize = Enum.AutomaticSize.X
-	Title.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
-	Title.BackgroundTransparency = 1
-	Title.BorderColor3 = Color3.fromRGB(0, 0, 0)
-	Title.BorderSizePixel = 0
-	Title.Position = UDim2.fromOffset(5, 0)
-	Title.Size = UDim2.fromScale(0, 1)
-	Title.Parent = Inline
-
-	local UIPadding = Instance.new("UIPadding")
-	UIPadding.Name = "UIPadding"
-	UIPadding.PaddingRight = UDim.new(0, 6)
-	UIPadding.Parent = Inline
-
-	local UIGradient = Instance.new("UIGradient")
-	UIGradient.Parent = Title
-	UIGradient.Name = "Gradient"
-	UIGradient.Color = ColorSequence.new{
-		ColorSequenceKeypoint.new(0, Color3.fromRGB(255, 255, 255)),
-		ColorSequenceKeypoint.new(0.01, Library.Accent),
-		ColorSequenceKeypoint.new(1, Color3.fromRGB(255, 255, 255))
-	}
-
-	Library.KeybindPath = Inline
-	table.insert(Library.ThemeObjects, UIGradient)
-
-	task.spawn(function()
-		while true do 
-			if Outline.Visible then 
-				for i = 1, #AnimatedText do 
-					task.wait(0.2)
-					Title.Text = AnimatedText[i]
-				end 
-			end 
-			task.wait(0.2)
-		end 
-	end)
-
-	task.spawn(function()
-		while true do
-			if KeybindList.KeybindActive then
-				local foundVisible = false
-				for _, v in pairs(Library.KeybindPath:GetDescendants()) do
-					if v:IsA("TextLabel") and v.Visible then
-						foundVisible = true
-						break
-					end
-				end
-		
-				if foundVisible then
-					Outline.Visible = true
-				else
-					Outline.Visible = false
-				end 
-			end            
-			task.wait()
-		end
-	end)
-
-	function KeybindList:SetVisible(State)
-		Outline.Visible = State
-		KeybindList.KeybindActive = State
-	end
-
-	Library:Drag(Outline, 0.1)
-
-	return KeybindList
 end
 --
 function Library:Configs(tab)
