@@ -2859,7 +2859,7 @@ function Library:KeybindList()
 	Outline.AutomaticSize = Enum.AutomaticSize.X
 	Outline.BackgroundColor3 = Color3.fromRGB(50, 50, 50)
 	Outline.BorderColor3 = Color3.fromRGB(0, 0, 0)
-	Outline.Position = UDim2.new(0, 15, 0.5, 0)
+	Outline.Position = UDim2.new(0, 30, 0.5, 0)
 	Outline.Size = UDim2.fromOffset(((#AnimatedText / 1.6) * 5) + 10, 20)
 	Outline.Visible = false
 	Outline.ZIndex = 50
