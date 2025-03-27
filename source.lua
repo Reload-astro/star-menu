@@ -2936,6 +2936,7 @@ function Library:Configs(tab)
 	local cfgs = tab:Section({Name = "Config", Side = "Left", Size = 427})
 	local window = tab:Section({Name = "Window", Side = "Right", Size = 427})
 	local watermark = Library:Watermark()
+	local keybindlist = Library:KeybindList()
 
 	local cfg_list = cfgs:List({Name = "Config List", Flag = "setting_configuration_list", Options = {}})
 	cfgs:Textbox({Flag = "settings_configuration_name", Placeholder = "Config name"})
@@ -3004,6 +3005,10 @@ function Library:Configs(tab)
 
 	window:Toggle({Name = "Watermark", Flag = "ui_watermark", Callback = function(state)
 		watermark:SetVisible(state)
+	end})
+
+	window:Toggle({Name = "Keybind List", Flag = "ui_keybindlist", Callback = function(state)
+		keybindlist:SetVisible(state)
 	end})
 
 	window:Colorpicker({Name = "Menu Accent", Flag = "MenuAccent", Default = Library.Accent, Callback = function(state)
