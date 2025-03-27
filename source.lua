@@ -161,10 +161,10 @@ do
 		return connection 
 	end
 	--
-	function Library:Instance(class, properties) 
+	function Library:Instance(class, Properties) 
 		local ins = Instance.new(class)
 
-		for _, v in next, properties do 
+		for _, v in next, Properties do 
 			ins[_] = v
 		end 
 
@@ -173,8 +173,8 @@ do
 		return ins 
 	end
 	--
-	function Library:Tween(obj, info, properties, callback)
-		local anim = TweenService:Create(obj, TweenInfo.new(unpack(info)), properties)
+	function Library:Tween(obj, info, Properties, callback)
+		local anim = TweenService:Create(obj, TweenInfo.new(unpack(info)), Properties)
 		anim:Play()
 	
 		if callback then anim.Completed:Connect(callback) end
@@ -2895,6 +2895,166 @@ function Sections:Textbox(Properties)
 	return Textbox
 end
 --
+function Library:Panel(Properties)
+	if Library.__panel == true then 
+		return 
+	end 
+
+	Library.__panel = true 
+
+	local Panel = {
+		Name = Properties.name or Properties.Name or "Are you sure?", 
+		Options = Properties.options or Properties.Options or {"Confirm", "Discard"},
+		Callback = Properties.callback or Properties.Callback or function() end, 
+	}
+
+	local panel_main_frame = Instance.new('Frame')
+	panel_main_frame.Parent = Library.gui
+	panel_main_frame.Name = ""
+	panel_main_frame.BackgroundTransparency = 0.4000000059604645
+	panel_main_frame.Size = UDim2.new(1, 0, 1, 0)
+	panel_main_frame.BorderColor3 = Color3.fromRGB(0, 0, 0)
+	panel_main_frame.ZIndex = 3
+	panel_main_frame.BorderSizePixel = 0
+	panel_main_frame.BackgroundColor3 = Color3.fromRGB(0, 0, 0)
+
+	local holder = Instance.new('Frame')
+	holder.Parent = panel_main_frame
+	holder.Name = ""
+	holder.BorderColor3 = Color3.fromRGB(19, 19, 19)
+	holder.AnchorPoint = Vector2.new(0.5, 0.5)
+	holder.BackgroundTransparency = 1
+	holder.Position = UDim2.new(0.5, 0, 0.5, 0)
+	holder.ZIndex = 4
+	holder.AutomaticSize = Enum.AutomaticSize.XY
+	holder.BackgroundColor3 = Color3.fromRGB(40, 40, 40)
+
+	local inline1 = Instance.new('Frame')
+	inline1.Parent = holder
+	inline1.Name = ""
+	inline1.BorderColor3 = Color3.fromRGB(8, 8, 8)
+	inline1.AutomaticSize = Enum.AutomaticSize.XY
+	inline1.BackgroundColor3 = Color3.fromRGB(56, 56, 56)
+
+	local main = Instance.new('Frame')
+	main.Parent = inline1
+	main.Name = ""
+	main.Position = UDim2.new(0, 4, 0, 4)
+	main.BorderColor3 = Color3.fromRGB(26, 26, 26)
+	main.Size = UDim2.new(1, -8, 1, -8)
+	main.BorderSizePixel = 2
+	main.BackgroundColor3 = Color3.fromRGB(26, 26, 26)
+
+	local UIStroke = Instance.new('UIStroke')
+	UIStroke.Parent = main
+	UIStroke.Name = ""
+	UIStroke.Color = Color3.fromRGB(57, 57, 57)
+	UIStroke.LineJoinMode = Enum.LineJoinMode.Miter
+
+	local tabs = Instance.new('Frame')
+	tabs.Parent = main
+	tabs.Name = ""
+	tabs.Position = UDim2.new(0, 8, 0, 8)
+	tabs.BorderColor3 = Color3.fromRGB(8, 8, 8)
+	tabs.Size = UDim2.new(1, -16, 1, -16)
+	tabs.BorderSizePixel = 2
+	tabs.BackgroundColor3 = Color3.fromRGB(22, 22, 22)
+
+	local UIStroke = Instance.new('UIStroke')
+	UIStroke.Parent = tabs
+	UIStroke.Name = ""
+	UIStroke.Color = Color3.fromRGB(57, 57, 57)
+	UIStroke.LineJoinMode = Enum.LineJoinMode.Miter
+
+	local UIPadding = Instance.new('UIPadding')
+	UIPadding.Parent = tabs
+	UIPadding.Name = ""
+	UIPadding.PaddingTop = UDim.new(0, 5)
+	UIPadding.PaddingBottom = UDim.new(0, 22)
+	UIPadding.PaddingRight = UDim.new(0, 20)
+	UIPadding.PaddingLeft = UDim.new(0, 20)
+
+	local aimbot = Instance.new('TextLabel')
+	aimbot.Parent = tabs
+	aimbot.Name = ""
+	aimbot.FontFace = Library.Font
+	aimbot.LineHeight = 1.2000000476837158
+	aimbot.TextStrokeTransparency = 0.5
+	aimbot.AnchorPoint = Vector2.new(0.5, 0)
+	aimbot.TextSize = 12
+	aimbot.Size = UDim2.new(0, 0, 0, 11)
+	aimbot.TextColor3 = Color3.fromRGB(170, 170, 170)
+	aimbot.BorderColor3 = Color3.fromRGB(0, 0, 0)
+	aimbot.Text = Panel.nam
+	aimbot.BackgroundTransparency = 1
+	aimbot.Position = UDim2.new(0.5, 0, 0, 8)
+	aimbot.BorderSizePixel = 0
+	aimbot.TextYAlignment = Enum.TextYAlignment.Top
+	aimbot.AutomaticSize = Enum.AutomaticSize.XY
+	aimbot.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+
+	local UIPadding = Instance.new('UIPadding')
+	UIPadding.Parent = aimbot
+	UIPadding.Name = ""
+	UIPadding.PaddingTop = UDim.new(0, 6)
+
+	local UIListLayout = Instance.new('UIListLayout')
+	UIListLayout.Parent = tabs
+	UIListLayout.Name = ""
+	UIListLayout.SortOrder = Enum.SortOrder.LayoutOrder
+	UIListLayout.HorizontalAlignment = Enum.HorizontalAlignment.Center
+	UIListLayout.Padding = UDim.new(0, 4)
+
+	local Frame = Instance.new('Frame')
+	Frame.Parent = tabs
+	Frame.Name = ""
+	Frame.BorderColor3 = Color3.fromRGB(0, 0, 0)
+	Frame.BorderSizePixel = 0
+	Frame.AutomaticSize = Enum.AutomaticSize.Y
+	Frame.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+
+	local UIListLayout = Instance.new('UIListLayout')
+	UIListLayout.Parent = Frame
+	UIListLayout.Name = ""
+	UIListLayout.SortOrder = Enum.SortOrder.LayoutOrder
+	UIListLayout.HorizontalAlignment = Enum.HorizontalAlignment.Center
+	UIListLayout.Padding = UDim.new(0, 3)
+
+	local UIPadding = Instance.new('UIPadding')
+	UIPadding.Parent = Frame
+	UIPadding.Name = ""
+
+	for _, v in next, Panel.Options do 
+		local button_inline = Instance.new('Frame')
+		button_inline.Parent = Frame
+		button_inline.Name = ""
+		button_inline.Position = UDim2.new(0, 0, 0, 4)
+		button_inline.BorderColor3 = Color3.fromRGB(19, 19, 19)
+		button_inline.Size = UDim2.new(0, 130, 0, 16)
+		button_inline.BorderSizePixel = 0
+		button_inline.BackgroundColor3 = Color3.fromRGB(8, 8, 8)
+
+		local button = Instance.new('TextButton')
+		button.Parent = button_inline
+		button.Name = ""
+		button.FontFace = Library.Font
+		button.TextColor3 = Color3.fromRGB(170, 170, 170)
+		button.BorderColor3 = Color3.fromRGB(56, 56, 56)
+		button.Text = v
+		button.TextStrokeTransparency = 0.5
+		button.Position = UDim2.new(0, 2, 0, 2)
+		button.Size = UDim2.new(1, -4, 1, -4)
+		button.TextSize = 12
+		button.BackgroundColor3 = Color3.fromRGB(38, 38, 38)
+		
+		button.MouseButton1Click:Connect(function()
+			Panel.Callback(v) 
+			panel_main_frame:Destroy() 
+			Library.__panel = false 
+		end)
+	end     
+end
+--
 function Sections:Button(Properties)
 	local Properties = Properties or {}
 	local Button = {
@@ -3007,6 +3167,7 @@ function Library:Configs(tab)
 		if config_name == "" or isfile(Library.cheatname..'/'..Library.gamename.."/configs".."/" .. config_name .. Library.fileext) then
 			return
 		end
+		
 		writefile(Library.cheatname..'/'..Library.gamename.."/configs".."/" .. config_name .. Library.fileext, Library:GetConfig())
 		update_config_list()
 	end})
@@ -3014,7 +3175,15 @@ function Library:Configs(tab)
 	cfgs:Button({Name = "Save", Callback = function()
 		local selected_config = Library.Flags.setting_configuration_list
 		if selected_config then
-			Library:SaveConfig(selected_config)
+			Library:Panel({
+				Name = "Are you sure you want to save the config '".. selected_config .."' ?",
+				Options = {"Yes", "No"},
+				Callback = function(option)
+					if option == "Yes" then 
+						Library:SaveConfig(selected_config)
+					end 
+				end
+			})
 		end
 	end})
 
@@ -3026,6 +3195,22 @@ function Library:Configs(tab)
 			end
 		end
 	end})
+
+	cfgs:Button({Name = 'Delete', Callback = function()
+		local selected_config = Library.Flags.setting_configuration_list
+        Library:Panel({
+            Name = "Are you sure you want to delete the config '".. selected_config .."' ?",
+            Options = {"Yes", "No"},
+            Callback = function(option)
+                if option == "Yes" then 
+                    if isfile(Library.cheatname..'/'..Library.gamename.."/configs".."/" .. selected_config .. Library.fileext) then
+                        delfile(Library.cheatname..'/'..Library.gamename..'/configs/'..selected_config.. Library.fileext)
+                        update_config_list()
+                    end
+                end 
+            end
+        })
+    end})
 
 	cfgs:Button({Name = "Refresh", Callback = function()
 		update_config_list()
@@ -3050,13 +3235,29 @@ function Library:Configs(tab)
 	end})
 
 	window:Button({Name = "Rejoin Server", Callback = function()
-		Players.LocalPlayer:Kick('['..Library.cheatname..']'..' Rejoining Server')
-		game:GetService("TeleportService"):TeleportToPlaceInstance(game.PlaceId, game.JobId);
+		Library:Panel({
+            Name = "Are you sure you want to rejoin the game ?",
+            Options = {"Yes", "No"},
+            Callback = function(option)
+                if option == "Yes" then 
+					Players.LocalPlayer:Kick('['..Library.cheatname..']'..' Rejoining Server')
+					game:GetService("TeleportService"):TeleportToPlaceInstance(game.PlaceId, game.JobId);
+                end 
+            end
+        })
 	end})
 
 	window:Button({Name = "Rejoin Game", Callback = function()
-		Players.LocalPlayer:Kick('['..Library.cheatname..']'..' Rejoining Game')
-		game:GetService("TeleportService"):Teleport(game.PlaceId);
+		Library:Panel({
+            Name = "Are you sure you want to rejoin the server ?",
+            Options = {"Yes", "No"},
+            Callback = function(option)
+                if option == "Yes" then 
+					Players.LocalPlayer:Kick('['..Library.cheatname..']'..' Rejoining Game')
+					game:GetService("TeleportService"):Teleport(game.PlaceId);
+                end 
+            end
+        })
 	end})
 
 	window:Button({Name = "Remove Voice Chat Ban", Callback = function()
@@ -3064,7 +3265,15 @@ function Library:Configs(tab)
 	end})
 
 	window:Button({Name = "Unload", Callback = function()
-		Library:Unload()
+		Library:Panel({
+            Name = "Are you sure you want to unload the cheat ?",
+            Options = {"Yes", "No"},
+            Callback = function(option)
+                if option == "Yes" then 
+					Library:Unload()
+                end 
+            end
+        })
 	end})
 end
 
