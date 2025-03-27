@@ -2896,9 +2896,7 @@ function Sections:Textbox(Properties)
 end
 --
 function Library:Panel(Properties)
-	if Library.__panel == true then 
-		return 
-	end 
+	if Library.__panel == true then return end
 
 	Library.__panel = true 
 
@@ -2914,7 +2912,7 @@ function Library:Panel(Properties)
 	panel_main_frame.BackgroundTransparency = 0.4000000059604645
 	panel_main_frame.Size = UDim2.new(1, 0, 1, 0)
 	panel_main_frame.BorderColor3 = Color3.fromRGB(0, 0, 0)
-	panel_main_frame.ZIndex = 3
+	panel_main_frame.ZIndex = 1000
 	panel_main_frame.BorderSizePixel = 0
 	panel_main_frame.BackgroundColor3 = Color3.fromRGB(0, 0, 0)
 
