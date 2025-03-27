@@ -2925,7 +2925,7 @@ function Library:Panel(Properties)
 	holder.AnchorPoint = Vector2.new(0.5, 0.5)
 	holder.BackgroundTransparency = 1
 	holder.Position = UDim2.new(0.5, 0, 0.5, 0)
-	holder.ZIndex = 4
+	holder.ZIndex = 999
 	holder.AutomaticSize = Enum.AutomaticSize.XY
 	holder.BackgroundColor3 = Color3.fromRGB(40, 40, 40)
 
@@ -3205,8 +3205,8 @@ function Library:Configs(tab)
                 if option == "Yes" then 
                     if isfile(Library.cheatname..'/'..Library.gamename.."/configs".."/" .. selected_config .. Library.fileext) then
                         delfile(Library.cheatname..'/'..Library.gamename..'/configs/'..selected_config.. Library.fileext)
-                        update_config_list()
                     end
+					update_config_list()
                 end 
             end
         })
