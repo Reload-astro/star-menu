@@ -5522,7 +5522,6 @@ function library:CreateConfigTab(window)
     end})
 
     library.config_holder:refresh_options(library:get_configs())
-    library:auto_load_config()
 
     return configs
 end
